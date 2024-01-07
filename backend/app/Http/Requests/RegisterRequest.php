@@ -40,7 +40,9 @@ class RegisterRequest extends FormRequest
             'email.required' => 'The email is required',
             'email.email' => 'The email is invalid',
             'email.unique' => 'This user already exists',
-            'password' => 'The password must contain at least 8 characters, a symbol and a number'
+            'password' => 'The password must contain at least 8 characters, a symbol and a number',
+            'password' => 'The password is required',
+            'password.confirmed' => 'Both passwords must match'
         ];
     }
 }
