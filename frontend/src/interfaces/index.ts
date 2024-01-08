@@ -35,3 +35,20 @@ export interface FieldProps {
   type: string;
   label: string;
 }
+
+export interface User {
+  username: string;
+  token: string;
+}
+
+export interface NewsAPIArticle {
+  source_id: string;
+  source_name: string;
+  author: string;
+  title: string;
+  url: string;
+  url_to_image: string;
+  published_at: string;
+  country_id: number;
+  category_id: number;
+}

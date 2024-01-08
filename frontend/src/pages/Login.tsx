@@ -5,6 +5,8 @@ import { FormData } from "../interfaces";
 import Alert from "../components/Alert";
 import axiosClient from "../config/axiosClient";
 import Loader from "../components/Loader";
+import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const initialFormValues = {
@@ -17,6 +19,9 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState([]);
 
+  const { authorizateUser } = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     setErrors([]);
@@ -25,7 +30,9 @@ const Login = () => {
     try {
       const { data } = await axiosClient.post(`/login`, formData);
       console.log(data);
+      authorizateUser(data);
       setFormData(initialFormValues);
+      navigate("/");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setErrors(Object.values(error.response?.data.errors));
@@ -55,7 +62,7 @@ const Login = () => {
       <nav className="lg:flex lg:justify-center">
         <Link
           className="block text-center my-5 text-slate-500 uppercase text-sm"
-          to="/register"
+          to="/auth/register"
         >
           Don't have an account yet? Sign up
         </Link>
